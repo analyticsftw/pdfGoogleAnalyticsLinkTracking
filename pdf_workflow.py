@@ -1,4 +1,4 @@
-# Processes a PDF file, extracts hyoerlinks and look for presence/absence of URL tracking parameters
+# Processes a PDF file, extracts hyperlinks and look for presence/absence of URL tracking parameters
 # Julien Coquet, June 2020
 
 import subprocess
