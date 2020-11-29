@@ -1,10 +1,1 @@
-Document infos:
-- Pages = 1
-- Producer = Skia/PDF m85
-
-References: 2
-- URL: 2
-
-URL References:
-- https://juliencoquet.com/en/
-- https://juliencoquet.com/en/?utm_source=julien&utm_medium=pdf
+Empty text file, will fill up with PDF audit results
