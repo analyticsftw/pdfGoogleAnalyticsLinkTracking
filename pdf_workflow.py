@@ -1,11 +1,11 @@
 # Processes a PDF file, extracts hyoerlinks and look for presence/absence of URL tracking parameters
 # Julien Coquet, June 2020
 
-import subprocess
-import sys
+import os, subprocess, sys
+import os.path
 
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+# Required packages
+import pdfx, pdfminer2
 
 
 def run(cmdline):
@@ -13,17 +13,26 @@ def run(cmdline):
 
 
 def main():
-    # Install missing modules
-    install("pdfx")
-    install("pdfminer2")
+    # check for filename argument
+    nargs = len(sys.argv)
+    if nargs < 2:
+        print ("Argument missing: filename.\nTry again with: python3 pdf_workflow.py yourfile.pdf")
+        exit()
+    
+
 
     # define source PDF file and
-    sourceFile = "basic.pdf"
+    sourceFile = sys.argv[1]
+    if not os.path.isfile(sourceFile):
+        print ('File ' + sourceFile + ' is missing.')
+        exit()
     outputFile = "urls_pdf.txt"
+
 
     # Runs pdfx as shell, extracts link URLs found in the source PDF file
     # and stores the output to a text file
     run("pdfx " + sourceFile + " -v > " + outputFile)
+
 
     # Open the output textfile
     file = open('urls_pdf.txt', mode='r')
@@ -47,6 +56,7 @@ def main():
                 tagged.append(link)
             else:
                 untagged.append(link)
+
 
     # Output results
     print("Tagged: %s/%s" % (str(len(tagged)), i - found)  )
